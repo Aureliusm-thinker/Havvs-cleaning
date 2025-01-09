@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Havvs CLEANING - Checkout</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Havvs cleaning.css">
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+    </header>
+    <div class="container">
+        <section id="summary">
+            <h2>Booking Summary</h2>
+            <form id="checkout-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Hidden Access Key -->
+                <input type="hidden" name="access_key" value="99191919-384a-4db7-a8b5-47b4ab9f4d26">
+
+                <!-- Hidden Fields for Email -->
+                <input type="hidden" name="subject" value="New Booking Checkout">
+                <input type="hidden" name="redirect" value="thank-you.html">
+
+                <!-- Display Booking Details -->
+                <p><strong>Name:</strong> <span id="summary-name"></span></p>
+                <input type="hidden" name="name" id="hidden-name">
+                
+                <p><strong>Service:</strong> <span id="summary-service"></span></p>
+                <input type="hidden" name="service" id="hidden-service">
+                
+                <p><strong>Hours:</strong> <span id="summary-hours"></span></p>
+                <input type="hidden" name="hours" id="hidden-hours">
+                
+                <p><strong>Workers:</strong> <span id="summary-workers"></span></p>
+                <input type="hidden" name="workers" id="hidden-workers">
+                
+                <p><strong>Total Price:</strong> <span id="summary-price"></span> AED</p>
+                <input type="hidden" name="total_price" id="hidden-price">
+
+                <!-- Confirmation Button -->
+                <button type="submit" class="confirm-btn">Confirm and Send</button>
+            </form>
+            
+            <button onclick="window.history.back()" aria-label="Edit your booking">Edit Booking</button>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Havvs Cleaning. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Parse query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Populate visible fields
+        const name = urlParams.get("name") || "Not provided";
+        const service = urlParams.get("service") || "Not provided";
+        const hours = urlParams.get("hours") || "Not provided";
+        const workers = urlParams.get("workers") || "Not provided";
+        const totalPrice = urlParams.get("totalPrice") || "Not calculated";
+
+        document.getElementById("summary-name").textContent = name;
+        document.getElementById("summary-service").textContent = service;
+        document.getElementById("summary-hours").textContent = hours;
+        document.getElementById("summary-workers").textContent = workers;
+        document.getElementById("summary-price").textContent = totalPrice;
+
+        // Populate hidden input fields for email
+        document.getElementById("hidden-name").value = name;
+        document.getElementById("hidden-service").value = service;
+        document.getElementById("hidden-hours").value = hours;
+        document.getElementById("hidden-workers").value = workers;
+        document.getElementById("hidden-price").value = totalPrice;
+    </script>
+</body>
+</html>
